@@ -27,4 +27,6 @@ jobs:
         run: npx eslint "js/**/*.js"
 
       - name: Format Check (Prettier)
-        run: npx prettier --check "**/*.{html,js,css}"
+        run: npx prettier --check "**/*.{html,js,css}" 
+
+        #wont work 
