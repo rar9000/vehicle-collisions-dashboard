@@ -28,5 +28,3 @@ jobs:
 
       - name: Format Check (Prettier)
         run: npx prettier --check "**/*.{html,js,css}" 
-
-        #wont work 
