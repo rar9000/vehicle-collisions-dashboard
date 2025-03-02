@@ -1,0 +1,32 @@
+name: Develop Branch 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint-format:
+    name: Lint and Format Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  
+
+      - name: Install Dependencies
+        run: npm ci  
+
+      - name: Lint HTML
+        run: npx htmlhint "**/*.html"
+
+      - name: Lint JavaScript
+        run: npx eslint "js/**/*.js"
+
+      - name: Format Check (Prettier)
+        run: npx prettier --check "**/*.{html,js,css}" 
+
+        #wont work 
