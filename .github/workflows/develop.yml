@@ -1,7 +1,7 @@
 name: Develop Branch 
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   lint-format:
