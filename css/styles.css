@@ -1,0 +1,165 @@
+
+@import url("reset.css");
+
+html, body {
+  font-size: 16px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.grid-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 98vw;
+  height: clamp(600px, 95vh, 1000px);
+  margin: auto;
+  /* overflow: auto; */
+}
+
+.site-grid {
+  min-height: 100%;
+  display: grid;
+  background-color: #0000008f;
+  border-radius: .5rem;
+  padding: 1vw;
+  gap: 1vw;
+  grid-template-areas:
+    "a b c"
+    "d d e"      
+}
+
+.box-a { grid-area: a; }
+.box-b { grid-area: b; }
+.box-c { grid-area: c; }
+.box-d { grid-area: d; }
+.box-e { grid-area: e; }
+
+.box {
+  display: flex;
+  border: .3rem solid #000;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-a, .box-b, .box-c {
+  background: #ffd0d0;
+  width: clamp(30px, 25vw, 400px);
+  height: clamp(15px, 10vh, 75px);
+}
+
+.box-b {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 1vw;
+}
+
+/*
+.box-b {
+  grid-area: b;
+  background: #faffd0;
+  width: 25vw;
+  height: clamp(85px, 10vh, 200px);
+}
+
+.box-c {
+  grid-area: c;
+  background: #faffd0;
+  width: 25vw;
+  height: clamp(85px, 10vh, 200px);
+}
+*/
+
+.box-d {
+  grid-area: d;
+  background: #d0ffd0;
+  width: clamp(600px, 70vw, 1000px);
+  height: clamp(300px, 75vh, 700px);
+}
+    
+.box-e {
+  grid-area: e;
+  display: flex;
+  flex-direction: column;
+  background: #d0d0ff;
+  width: clamp(100px, 25vw, 400px);
+  height: clamp(300px, 75vh, 700px);
+}
+
+.box-e-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.box-e-child:nth-child(2) {
+  border-top: .3rem solid #000;
+}
+
+
+@media (max-width: 500px) {
+  
+  .grid-container {
+    width: 98vw;
+    height: clamp(600px, 95vh, 1000px);
+    overflow: auto;
+  }
+
+  .site-grid {
+    grid-template-areas:
+      "a"
+      "b"
+      "c"
+      "e";
+    overflow: auto;
+
+  }
+
+  .box-a, .box-b, .box-c {
+    background: #ffd0d0;
+    width: clamp(400px, 96vw, 500px);
+    height: clamp(15px, 96vh, 1000px);
+    overflow: auto;
+  }
+  /* Hide the Map (Box D) on mobile */
+  .box-d {
+    display: none;
+  }
+
+  .box-e {
+    grid-area: e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0;
+    flex-direction: column;
+    background: #d0d0ff;
+    width: clamp(400px, 96vw, 500px);
+    height: clamp(1000px, 96vh, 1050px);
+  }
+  
+  .box-e-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .box-e-child:nth-child(2) {
+    justify-content: center;
+    align-items: center;
+    border-top: .3rem solid #000;
+  }
+  /* Let grid items adapt to content size */
+}
