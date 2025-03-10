@@ -21,7 +21,6 @@ body {
   width: 98vw;
   height: clamp(600px, 95vh, 1000px);
   margin: auto;
-  /* overflow: auto; */
 }
 
 .site-grid {
@@ -62,31 +61,13 @@ body {
   gap: 1vw;
 }
 
-/*
-.box-b {
-  grid-area: b;
-  background: #faffd0;
-  width: 25vw;
-  height: clamp(85px, 10vh, 200px);
-}
-
-.box-c {
-  grid-area: c;
-  background: #faffd0;
-  width: 25vw;
-  height: clamp(85px, 10vh, 200px);
-}
-*/
-
 .box-d {
-  grid-area: d;
   background: #d0ffd0;
   width: clamp(600px, 70vw, 1000px);
   height: clamp(300px, 75vh, 700px);
 }
     
 .box-e {
-  grid-area: e;
   display: flex;
   flex-direction: column;
   background: #d0d0ff;
@@ -109,6 +90,11 @@ body {
 
 @media (max-width: 500px) {
   
+  html, body {
+    height: min-content;
+    overflow-y: auto;
+  }
+
   .grid-container {
     width: 98vw;
     height: clamp(600px, 95vh, 1000px);
@@ -121,30 +107,29 @@ body {
       "b"
       "c"
       "e";
-    overflow: auto;
+    overflow-y: scroll;
+    margin: auto; 
 
   }
 
   .box-a, .box-b, .box-c {
     background: #ffd0d0;
-    width: clamp(400px, 96vw, 500px);
-    height: clamp(15px, 96vh, 1000px);
-    overflow: auto;
+    width: clamp(200px, 96vw, 500px);
+    height: clamp(40px, 96vh, 100px);
   }
-  /* Hide the Map (Box D) on mobile */
+
   .box-d {
     display: none;
   }
 
   .box-e {
-    grid-area: e;
     display: flex;
     align-items: center;
     justify-content: center;
     flex: 0;
     flex-direction: column;
     background: #d0d0ff;
-    width: clamp(400px, 96vw, 500px);
+    width: clamp(200px, 96vw, 500px);
     height: clamp(1000px, 96vh, 1050px);
   }
   
@@ -161,5 +146,4 @@ body {
     align-items: center;
     border-top: .3rem solid #000;
   }
-  /* Let grid items adapt to content size */
 }
