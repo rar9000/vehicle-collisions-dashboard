@@ -38,7 +38,7 @@ body {
 .box-a { grid-area: a; }
 .box-b { grid-area: b; }
 .box-c { grid-area: c; }
-.box-d { grid-area: d; }
+.box-map { grid-area: d; }
 .box-e { grid-area: e; }
 
 .box {
@@ -61,12 +61,42 @@ body {
   gap: 1vw;
 }
 
-.box-d {
-  background: #d0ffd0;
+.box-map {
   width: clamp(600px, 70vw, 1000px);
   height: clamp(300px, 75vh, 700px);
 }
-    
+
+#map {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.neighborhood-label {
+  font-weight: bold;
+  color: black;
+  background: white;
+  border-radius: 3px;
+  padding: 2px 5px;
+  border: 1px solid black;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none; 
+}
+
+.road-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: black;
+  background: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: 1px solid black;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .box-e {
   display: flex;
   flex-direction: column;
@@ -118,7 +148,7 @@ body {
     height: clamp(40px, 96vh, 100px);
   }
 
-  .box-d {
+  .box-map {
     display: none;
   }
 

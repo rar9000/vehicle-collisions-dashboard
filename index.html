@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Louisville Vehicle Collisions</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" >
+  <link rel="stylesheet" href="css/leaflet/leaflet.css" >
 </head>
 
 <body>
@@ -18,12 +19,19 @@
                 <button>Category2</button>
             </div>
             <div class="box box-c">Total (output)</div>
-            <div class="box box-d">Map Goes Here</div>
+            <div class="box box-map">
+                <div id="map"></div>
+            </div>
             <div class="box box-e">
                 <div class="box-e-child">Data List</div>
                 <div class="box-e-child">Chart</div>
             </div>
         </div>
     </div>
+
+    <script src="js/leaflet.js"></script>"
+    <script src="js/map.js"></script>
+    <script src="js/polylabel/polylabel.js"></script>
+
 </body>
 </html>
