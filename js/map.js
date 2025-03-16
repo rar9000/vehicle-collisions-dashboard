@@ -20,23 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 onEachFeature: function (feature, layer) {
                     layer.on("click", function () {
-                        removeAllLabels();
                         this.bringToBack(); 
+                        console.log("Neighborhood clicked:", feature.properties.NH_NAME);
 
-                        console.log("Neighborhood clicked:", feature.properties.NH_NAME); 
-
-                        if (layer.getTooltip()) {
-                            layer.unbindTooltip();
+                        if (!layer.getPopup()) {
+                            layer.bindPopup(
+                                `<b>${feature.properties.NH_NAME}</b><br>
+                                 Population: `,
+                                { autoClose: false, closeOnClick: false }
+                            ).openPopup();
                         }
-
-                        let tooltip = layer.bindTooltip(feature.properties.NH_NAME, {
-                            direction: "center",
-                            className: "neighborhood-label",
-                            permanent: true
-                        });
-
-                        tooltip.openTooltip();
-                        tooltip.update(); 
                     });
                 }
             }).addTo(map);
@@ -47,99 +40,77 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error("Error loading neighborhoods:", error));
 
-        fetch("../data/louisville_roads.geojson")
-            .then(response => response.json())
-            .then(data => {
-                var roadLayer = L.geoJSON(data, {
-                    style: function () {
-                        return { color: "#000000", weight: 1.5, opacity: 1 };
-                    },
-                    onEachFeature: function (feature, layer) {
-                        if (feature.properties.ROAD_NAME) {
-                            layer.on("click", function () {
-                                removeAllLabels();
-                                this.bringToBack();  
-        
-                                console.log("Road clicked:", feature.properties.ROAD_NAME);
-        
-                                if (layer.getTooltip()) {
-                                    layer.unbindTooltip();
-                                }
-        
-                                let tooltip = layer.bindTooltip(feature.properties.ROAD_NAME, {
-                                    direction: "center",
-                                    className: "road-label",
-                                    permanent: true
-                                });
-        
-                                tooltip.openTooltip();
-                                tooltip.update(); 
-                            });
-                        }
-                    }
-                }).addTo(map);
-        
-                roadLayer.eachLayer(layer => layer.bringToBack());
-            })
-            .catch(error => console.error("Error loading roads:", error));
+    fetch("../data/louisville_roads.geojson")
+        .then(response => response.json())
+        .then(data => {
+            var roadLayer = L.geoJSON(data, {
+                style: function () {
+                    return { color: "#000000", weight: 1.5, opacity: 1 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties.ROAD_NAME) {
+                        layer.on("click", function () {
+                            this.bringToBack(); 
+                            console.log("Road clicked:", feature.properties.ROAD_NAME);
 
-        fetch("../data/collisions/01-24-2025_crashes.csv")
-            .then(response => response.text())
-            .then(csvText => {
-                Papa.parse(csvText, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: function (results) {
-                        let crashData = results.data;
-        
-                        let crashLayer = L.layerGroup(); 
-        
-                        crashData.forEach(crash => {
-                            let lat = parseFloat(crash.Latitude);
-                            let lon = parseFloat(crash.Longitude);
-                            let incidentNumber = crash["IncidentID"] || "Unknown Incident"; 
-        
-                            if (!isNaN(lat) && !isNaN(lon)) {
-                                let marker = L.circleMarker([lat, lon], {
-                                    radius: 6, 
-                                    fillColor: "red",
-                                    color: "#000",
-                                    weight: 1,
-                                    opacity: 1,
-                                    fillOpacity: 0.8
-                                }).bindPopup(`<b>Incident Number:</b> ${incidentNumber}<br>`, { autoClose: false });
-        
-                                marker.on("click", function () {
-                                    removeAllLabels();
-                                    this.bringToFront();
-                                    this.openPopup();
-                                });
-        
-                                crashLayer.addLayer(marker); 
+                            if (!layer.getPopup()) {
+                                layer.bindPopup(`<b>${feature.properties.ROAD_NAME}</b>`,
+                                     { autoClose: false, closeOnClick: false }
+                                ).openPopup();
                             }
                         });
-        
-                        crashLayer.addTo(map); 
-                        
-                        crashLayer.eachLayer(layer => layer.bringToFront());
                     }
-                });
-            })
-            .catch(error => console.error("Error loading CSV:", error));
+                }
+            }).addTo(map);
 
-    function removeAllLabels() {
-        map.eachLayer(layer => {
-            if (layer.getTooltip()) {
-                layer.unbindTooltip(); 
-            }
-            if (layer instanceof L.Popup) {
-                layer.closePopup(); 
-            }
-        });
-    }
+            roadLayer.eachLayer(layer => layer.bringToBack());
+        })
+        .catch(error => console.error("Error loading roads:", error));
 
-    map.on("click", function () {
-        console.log("Map clicked (empty space), removing labels.");
-        removeAllLabels();
-    });
+    fetch("../data/collisions/01-24-2025_crashes.csv")
+        .then(response => response.text())
+        .then(csvText => {
+            Papa.parse(csvText, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function (results) {
+                    let crashData = results.data;
+                    let crashLayer = L.layerGroup();
+
+                    crashData.forEach(crash => {
+                        let lat = parseFloat(crash.Latitude);
+                        let lon = parseFloat(crash.Longitude);
+                        let incidentNumber = crash["IncidentID"] || "Unknown Incident";
+
+                        if (!isNaN(lat) && !isNaN(lon)) {
+                            let marker = L.circleMarker([lat, lon], {
+                                radius: 6,
+                                fillColor: "red",
+                                color: "#000",
+                                weight: 1,
+                                opacity: 1,
+                                fillOpacity: 0.8
+                            });
+
+                            marker.on("click", function () {
+                                this.bringToFront(); 
+                                console.log("Crash clicked:", incidentNumber);
+
+                                if (!marker.getPopup()) {
+                                    marker.bindPopup(`<b>Incident Number:</b> ${incidentNumber}<br>`,
+                                         { autoClose: false, closeOnClick: false }
+                                    ).openPopup();
+                                }
+                            });
+
+                            crashLayer.addLayer(marker);
+                        }
+                    });
+
+                    crashLayer.addTo(map);
+                    crashLayer.eachLayer(layer => layer.bringToFront());
+                }
+            });
+        })
+        .catch(error => console.error("Error loading CSV:", error));
 });
