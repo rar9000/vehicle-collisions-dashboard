@@ -1,0 +1,10 @@
+
+
+[build]
+publish = "."
+functions = "js/netlify/functions"
+
+[dev]
+framework = "#static"
+publish = "."
+functions = "js/netlify/functions"
