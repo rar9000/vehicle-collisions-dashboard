@@ -1,0 +1,817 @@
+[
+    {
+        "nh_name": "PORTLAND",
+        "population": 9576,
+        "square_miles": 2.5146143754
+    },
+    {
+        "nh_name": "SHAWNEE",
+        "population": 8677,
+        "square_miles": 2.1507039528
+    },
+    {
+        "nh_name": "BROWNSBORO ZORN",
+        "population": 2477,
+        "square_miles": 0.7883853667
+    },
+    {
+        "nh_name": "CLIFTON HEIGHTS",
+        "population": 4379,
+        "square_miles": 0.6406369112
+    },
+    {
+        "nh_name": "BUTCHERTOWN",
+        "population": 1562,
+        "square_miles": 0.9183596518
+    },
+    {
+        "nh_name": "CRESCENT HILL",
+        "population": 7750,
+        "square_miles": 1.901273278
+    },
+    {
+        "nh_name": "DOWNTOWN",
+        "population": 3475,
+        "square_miles": 1.1848664644
+    },
+    {
+        "nh_name": "RUSSELL",
+        "population": 7482,
+        "square_miles": 1.4033663578
+    },
+    {
+        "nh_name": "CLIFTON",
+        "population": 1739,
+        "square_miles": 0.6819346561
+    },
+    {
+        "nh_name": "IRISH HILL",
+        "population": 1538,
+        "square_miles": 0.3996394161
+    },
+    {
+        "nh_name": "PHOENIX HILL",
+        "population": 3310,
+        "square_miles": 0.5832108655
+    },
+    {
+        "nh_name": "ROCKCREEK LEXINGTON ROAD",
+        "population": 1306,
+        "square_miles": 0.599147036
+    },
+    {
+        "nh_name": "CHICKASAW",
+        "population": 4550,
+        "square_miles": 1.217124338
+    },
+    {
+        "nh_name": "PARKLAND",
+        "population": 4651,
+        "square_miles": 0.8135184075
+    },
+    {
+        "nh_name": "CALIFORNIA",
+        "population": 3961,
+        "square_miles": 1.2297475791
+    },
+    {
+        "nh_name": "CHEROKEE TRIANGLE",
+        "population": 4123,
+        "square_miles": 0.9788988858
+    },
+    {
+        "nh_name": "CHEROKEE GARDENS",
+        "population": 507,
+        "square_miles": 0.39193782
+    },
+    {
+        "nh_name": "SMOKETOWN JACKSON",
+        "population": 2243,
+        "square_miles": 0.3958531687
+    },
+    {
+        "nh_name": "OLD LOUISVILLE",
+        "population": 9519,
+        "square_miles": 1.197974582
+    },
+    {
+        "nh_name": "CHEROKEE SENECA",
+        "population": 1799,
+        "square_miles": 1.3169079443
+    },
+    {
+        "nh_name": "PARISTOWN POINTE",
+        "population": 398,
+        "square_miles": 0.0676644801
+    },
+    {
+        "nh_name": "ORIGINAL HIGHLANDS",
+        "population": 1504,
+        "square_miles": 0.1823748868
+    },
+    {
+        "nh_name": "LIMERICK",
+        "population": 1900,
+        "square_miles": 0.2269566966
+    },
+    {
+        "nh_name": "BOWMAN",
+        "population": 2545,
+        "square_miles": 1.2673398341
+    },
+    {
+        "nh_name": "GERMANTOWN",
+        "population": 3754,
+        "square_miles": 0.5996645024
+    },
+    {
+        "nh_name": "PARK HILL",
+        "population": 3829,
+        "square_miles": 1.004413314
+    },
+    {
+        "nh_name": "TYLER PARK",
+        "population": 2544,
+        "square_miles": 0.5144843265
+    },
+    {
+        "nh_name": "SHELBY PARK",
+        "population": 2656,
+        "square_miles": 0.4064099116
+    },
+    {
+        "nh_name": "BONNYCASTLE",
+        "population": 2165,
+        "square_miles": 0.3261417399
+    },
+    {
+        "nh_name": "PARK DUVALLE",
+        "population": 3972,
+        "square_miles": 0.9101214659
+    },
+    {
+        "nh_name": "HIKES POINT",
+        "population": 3573,
+        "square_miles": 0.8952060855
+    },
+    {
+        "nh_name": "HIGHLANDS DOUGLASS",
+        "population": 2858,
+        "square_miles": 0.6444187762
+    },
+    {
+        "nh_name": "DEER PARK",
+        "population": 4139,
+        "square_miles": 0.4912264786
+    },
+    {
+        "nh_name": "ALGONQUIN",
+        "population": 6651,
+        "square_miles": 1.1916697722
+    },
+    {
+        "nh_name": "SCHNITZELBURG",
+        "population": 4215,
+        "square_miles": 0.5796235142
+    },
+    {
+        "nh_name": "MERRIWETHER",
+        "population": 1613,
+        "square_miles": 0.2600505411
+    },
+    {
+        "nh_name": "UNIVERSITY",
+        "population": 3380,
+        "square_miles": 0.8164362726
+    },
+    {
+        "nh_name": "HALLMARK",
+        "population": 319,
+        "square_miles": 0.1381330077
+    },
+    {
+        "nh_name": "POPLAR LEVEL",
+        "population": 2876,
+        "square_miles": 1.2128093123
+    },
+    {
+        "nh_name": "AVONDALE MELBOURNE HEIGHTS",
+        "population": 2279,
+        "square_miles": 0.4845660439
+    },
+    {
+        "nh_name": "BELKNAP",
+        "population": 4939,
+        "square_miles": 0.7902278747
+    },
+    {
+        "nh_name": "HAWTHORNE",
+        "population": 1950,
+        "square_miles": 0.43925561
+    },
+    {
+        "nh_name": "SAINT JOSEPH",
+        "population": 3474,
+        "square_miles": 0.6051947575
+    },
+    {
+        "nh_name": "TAYLOR BERRY",
+        "population": 6213,
+        "square_miles": 1.0341570418
+    },
+    {
+        "nh_name": "BON AIR",
+        "population": 5829,
+        "square_miles": 1.232564206
+    },
+    {
+        "nh_name": "AUDUBON",
+        "population": 1689,
+        "square_miles": 0.6215701103
+    },
+    {
+        "nh_name": "GARDINER LANE",
+        "population": 1283,
+        "square_miles": 0.2969344832
+    },
+    {
+        "nh_name": "HAYFIELD DUNDEE",
+        "population": 2554,
+        "square_miles": 0.5895902587
+    },
+    {
+        "nh_name": "SOUTH LOUISVILLE",
+        "population": 4338,
+        "square_miles": 0.7748447779
+    },
+    {
+        "nh_name": "KLONDIKE",
+        "population": 4686,
+        "square_miles": 0.8186251093
+    },
+    {
+        "nh_name": "BASHFORD MANOR",
+        "population": 4324,
+        "square_miles": 0.5550953556
+    },
+    {
+        "nh_name": "FAIRGROUNDS",
+        "population": 79,
+        "square_miles": 1.0822690579
+    },
+    {
+        "nh_name": "CAMP TAYLOR",
+        "population": 781,
+        "square_miles": 0.416852329
+    },
+    {
+        "nh_name": "WILDER PARK",
+        "population": 2222,
+        "square_miles": 0.3704136042
+    },
+    {
+        "nh_name": "PRESTONIA",
+        "population": 1114,
+        "square_miles": 0.3729109051
+    },
+    {
+        "nh_name": "WYANDOTTE/OAKDALE",
+        "population": 3197,
+        "square_miles": 0.5431051204
+    },
+    {
+        "nh_name": "JACOBS",
+        "population": 4389,
+        "square_miles": 0.7040543328
+    },
+    {
+        "nh_name": "HIGHLAND PARK",
+        "population": 60,
+        "square_miles": 0.5863281708
+    },
+    {
+        "nh_name": "BEECHMONT",
+        "population": 8600,
+        "square_miles": 1.4449226463
+    },
+    {
+        "nh_name": "PRESTONIA",
+        "population": 1114,
+        "square_miles": 0.0546404239
+    },
+    {
+        "nh_name": "HAZELWOOD",
+        "population": 1678,
+        "square_miles": 0.6420915971
+    },
+    {
+        "nh_name": "CLOVERLEAF",
+        "population": 3824,
+        "square_miles": 0.7250865196
+    },
+    {
+        "nh_name": "STANDIFORD",
+        "population": 27,
+        "square_miles": 0.2730963859
+    },
+    {
+        "nh_name": "SOUTHSIDE",
+        "population": 4882,
+        "square_miles": 0.9196919987
+    },
+    {
+        "nh_name": "IROQUOIS",
+        "population": 2990,
+        "square_miles": 0.2356694971
+    },
+    {
+        "nh_name": "EDGEWOOD",
+        "population": 1053,
+        "square_miles": 0.7442786781
+    },
+    {
+        "nh_name": "IROQUOIS PARK",
+        "population": 2865,
+        "square_miles": 1.3717985619
+    },
+    {
+        "nh_name": "IROQUOIS",
+        "population": 2990,
+        "square_miles": 0.4248222976
+    },
+    {
+        "nh_name": "SOUTHLAND PARK",
+        "population": 808,
+        "square_miles": 0.681860258
+    },
+    {
+        "nh_name": "KENWOOD HILL",
+        "population": 2630,
+        "square_miles": 0.5174057787
+    },
+    {
+        "nh_name": "AUBURNDALE",
+        "population": 2219,
+        "square_miles": 0.6123918305
+    },
+    {
+        "nh_name": "ANCHORAGE",
+        "population": 2357,
+        "square_miles": 2.9588104367
+    },
+    {
+        "nh_name": "AUDUBON PARK",
+        "population": 1273,
+        "square_miles": 0.3269424384
+    },
+    {
+        "nh_name": "BANCROFT",
+        "population": 528,
+        "square_miles": 0.1549281697
+    },
+    {
+        "nh_name": "BARBOURMEADE",
+        "population": 1256,
+        "square_miles": 0.391921776
+    },
+    {
+        "nh_name": "BEECHWOOD VILLAGE",
+        "population": 1510,
+        "square_miles": 0.2765939153
+    },
+    {
+        "nh_name": "BELLEMEADE",
+        "population": 945,
+        "square_miles": 0.2807718444
+    },
+    {
+        "nh_name": "BELLEWOOD",
+        "population": 218,
+        "square_miles": 0.0792096023
+    },
+    {
+        "nh_name": "BLUE RIDGE MANOR",
+        "population": 761,
+        "square_miles": 0.1823151261
+    },
+    {
+        "nh_name": "BRIARWOOD",
+        "population": 414,
+        "square_miles": 0.0922623511
+    },
+    {
+        "nh_name": "BROECK POINTE",
+        "population": 242,
+        "square_miles": 0.0678087204
+    },
+    {
+        "nh_name": "BROWNSBORO FARM",
+        "population": 649,
+        "square_miles": 0.2278436279
+    },
+    {
+        "nh_name": "BROWNSBORO VILLAGE",
+        "population": 342,
+        "square_miles": 0.0716169983
+    },
+    {
+        "nh_name": "CAMBRIDGE",
+        "population": 129,
+        "square_miles": 0.054990321
+    },
+    {
+        "nh_name": "COLDSTREAM",
+        "population": 1243,
+        "square_miles": 0.2205457899
+    },
+    {
+        "nh_name": "CREEKSIDE",
+        "population": 358,
+        "square_miles": 0.0738450992
+    },
+    {
+        "nh_name": "CROSSGATE",
+        "population": 221,
+        "square_miles": 0.0527822879
+    },
+    {
+        "nh_name": "DOUGLASS HILLS",
+        "population": 5713,
+        "square_miles": 1.3192707935
+    },
+    {
+        "nh_name": "DRUID HILLS",
+        "population": 286,
+        "square_miles": 0.08074483
+    },
+    {
+        "nh_name": "FINCASTLE",
+        "population": 635,
+        "square_miles": 0.2083624257
+    },
+    {
+        "nh_name": "FOREST HILLS",
+        "population": 451,
+        "square_miles": 0.2727195594
+    },
+    {
+        "nh_name": "GLENVIEW",
+        "population": 603,
+        "square_miles": 1.4391025275
+    },
+    {
+        "nh_name": "GLENVIEW HILLS",
+        "population": 346,
+        "square_miles": 0.1158719648
+    },
+    {
+        "nh_name": "GLENVIEW MANOR",
+        "population": 242,
+        "square_miles": 0.0843786691
+    },
+    {
+        "nh_name": "GOOSE CREEK",
+        "population": 280,
+        "square_miles": 0.0604899331
+    },
+    {
+        "nh_name": "GRAYMOOR-DEVONDALE",
+        "population": 3095,
+        "square_miles": 0.7402873278
+    },
+    {
+        "nh_name": "GREEN SPRING",
+        "population": 693,
+        "square_miles": 0.2627427925
+    },
+    {
+        "nh_name": "HERITAGE CREEK",
+        "population": 861,
+        "square_miles": 0.543378952
+    },
+    {
+        "nh_name": "HICKORY HILL",
+        "population": 96,
+        "square_miles": 0.0263841036
+    },
+    {
+        "nh_name": "HILLS AND DALES",
+        "population": 165,
+        "square_miles": 0.0996123791
+    },
+    {
+        "nh_name": "HILLVIEW LOUISVILLE OVERLAP",
+        "population": 0,
+        "square_miles": 0.0030688022
+    },
+    {
+        "nh_name": "HOLLOW CREEK",
+        "population": 823,
+        "square_miles": 0.2298874627
+    },
+    {
+        "nh_name": "HOLLYVILLA",
+        "population": 469,
+        "square_miles": 0.3428597103
+    },
+    {
+        "nh_name": "HOUSTON ACRES",
+        "population": 561,
+        "square_miles": 0.1442800926
+    },
+    {
+        "nh_name": "HURSTBOURNE",
+        "population": 4402,
+        "square_miles": 1.7911675575
+    },
+    {
+        "nh_name": "HURSTBOURNE ACRES",
+        "population": 1995,
+        "square_miles": 0.3298486408
+    },
+    {
+        "nh_name": "INDIAN HILLS",
+        "population": 3011,
+        "square_miles": 1.9688138305
+    },
+    {
+        "nh_name": "JEFFERSONTOWN",
+        "population": 27933,
+        "square_miles": 10.9112526603
+    },
+    {
+        "nh_name": "KINGSLEY",
+        "population": 425,
+        "square_miles": 0.069155601
+    },
+    {
+        "nh_name": "LANGDON PLACE",
+        "population": 1020,
+        "square_miles": 0.1673809911
+    },
+    {
+        "nh_name": "LINCOLNSHIRE",
+        "population": 128,
+        "square_miles": 0.0452323511
+    },
+    {
+        "nh_name": "LYNDON",
+        "population": 11451,
+        "square_miles": 3.6201911359
+    },
+    {
+        "nh_name": "LYNNVIEW",
+        "population": 760,
+        "square_miles": 0.1806001403
+    },
+    {
+        "nh_name": "MANOR CREEK",
+        "population": 257,
+        "square_miles": 0.0534435526
+    },
+    {
+        "nh_name": "MARYHILL ESTATES",
+        "population": 219,
+        "square_miles": 0.0397203112
+    },
+    {
+        "nh_name": "MEADOW VALE",
+        "population": 791,
+        "square_miles": 0.1999120909
+    },
+    {
+        "nh_name": "MEADOWBROOK FARM",
+        "population": 112,
+        "square_miles": 0.0278736913
+    },
+    {
+        "nh_name": "MEADOWVIEW ESTATES",
+        "population": 132,
+        "square_miles": 0.078459856
+    },
+    {
+        "nh_name": "MIDDLETOWN",
+        "population": 7885,
+        "square_miles": 5.2019969932
+    },
+    {
+        "nh_name": "MOCKINGBIRD VALLEY",
+        "population": 144,
+        "square_miles": 0.2040612068
+    },
+    {
+        "nh_name": "MOORLAND",
+        "population": 571,
+        "square_miles": 0.0923426579
+    },
+    {
+        "nh_name": "MURRAY HILL",
+        "population": 613,
+        "square_miles": 0.1325122774
+    },
+    {
+        "nh_name": "NORBOURNE ESTATES",
+        "population": 510,
+        "square_miles": 0.076989337
+    },
+    {
+        "nh_name": "NORTHFIELD",
+        "population": 1266,
+        "square_miles": 0.4722278389
+    },
+    {
+        "nh_name": "NORWOOD",
+        "population": 413,
+        "square_miles": 0.115149701
+    },
+    {
+        "nh_name": "OLD BROWNSBORO PLACE",
+        "population": 416,
+        "square_miles": 0.1333234947
+    },
+    {
+        "nh_name": "PARKWAY VILLAGE",
+        "population": 713,
+        "square_miles": 0.0871587904
+    },
+    {
+        "nh_name": "PLANTATION",
+        "population": 928,
+        "square_miles": 0.2001681277
+    },
+    {
+        "nh_name": "POPLAR HILLS",
+        "population": 408,
+        "square_miles": 0.0255180343
+    },
+    {
+        "nh_name": "RICHLAWN",
+        "population": 374,
+        "square_miles": 0.1009255746
+    },
+    {
+        "nh_name": "RIVERWOOD",
+        "population": 535,
+        "square_miles": 0.2059114117
+    },
+    {
+        "nh_name": "ROLLING FIELDS",
+        "population": 489,
+        "square_miles": 0.2340703458
+    },
+    {
+        "nh_name": "ROLLING HILLS",
+        "population": 1009,
+        "square_miles": 0.1888538149
+    },
+    {
+        "nh_name": "SAINT MATTHEWS",
+        "population": 18022,
+        "square_miles": 4.4203989567
+    },
+    {
+        "nh_name": "SAINT REGIS PARK",
+        "population": 1568,
+        "square_miles": 0.3583474649
+    },
+    {
+        "nh_name": "SENECA GARDENS",
+        "population": 672,
+        "square_miles": 0.1534339499
+    },
+    {
+        "nh_name": "SHIVELY",
+        "population": 15723,
+        "square_miles": 4.6149564979
+    },
+    {
+        "nh_name": "SOUTH PARK VIEW",
+        "population": 4,
+        "square_miles": 0.1210898115
+    },
+    {
+        "nh_name": "SPRING MILL",
+        "population": 365,
+        "square_miles": 0.0545911541
+    },
+    {
+        "nh_name": "SPRING VALLEY",
+        "population": 819,
+        "square_miles": 0.1974775225
+    },
+    {
+        "nh_name": "STRATHMOOR MANOR",
+        "population": 419,
+        "square_miles": 0.0545004758
+    },
+    {
+        "nh_name": "STRATHMOOR VILLAGE",
+        "population": 563,
+        "square_miles": 0.1011934527
+    },
+    {
+        "nh_name": "SYCAMORE",
+        "population": 186,
+        "square_miles": 0.015830963
+    },
+    {
+        "nh_name": "TEN BROECK",
+        "population": 104,
+        "square_miles": 0.2201225904
+    },
+    {
+        "nh_name": "THORNHILL",
+        "population": 193,
+        "square_miles": 0.044559035
+    },
+    {
+        "nh_name": "WATTERSON PARK",
+        "population": 969,
+        "square_miles": 1.4365685058
+    },
+    {
+        "nh_name": "WELLINGTON",
+        "population": 464,
+        "square_miles": 0.0884995117
+    },
+    {
+        "nh_name": "WEST BUECHEL",
+        "population": 2046,
+        "square_miles": 0.6430806034
+    },
+    {
+        "nh_name": "WESTWOOD",
+        "population": 534,
+        "square_miles": 0.1203471336
+    },
+    {
+        "nh_name": "WILDWOOD",
+        "population": 222,
+        "square_miles": 0.0725516924
+    },
+    {
+        "nh_name": "WINDY HILLS",
+        "population": 2290,
+        "square_miles": 0.886118108
+    },
+    {
+        "nh_name": "WOODLAND HILLS",
+        "population": 664,
+        "square_miles": 0.2095298734
+    },
+    {
+        "nh_name": "WOODLAWN PARK",
+        "population": 766,
+        "square_miles": 0.2511911457
+    },
+    {
+        "nh_name": "WORTHINGTON HILLS",
+        "population": 1585,
+        "square_miles": 0.2554444047
+    },
+    {
+        "nh_name": "ST. DENNIS",
+        "population": 8224,
+        "square_miles": 2.6116171407
+    },
+    {
+        "nh_name": "BUECHEL",
+        "population": 8596,
+        "square_miles": 2.5165814356
+    },
+    {
+        "nh_name": "NEWBURG",
+        "population": 20477,
+        "square_miles": 5.7221855652
+    },
+    {
+        "nh_name": "FERN CREEK",
+        "population": 19391,
+        "square_miles": 5.8087748499
+    },
+    {
+        "nh_name": "PLEASURE RIDGE PARK",
+        "population": 27325,
+        "square_miles": 8.2913794533
+    },
+    {
+        "nh_name": "HIGHVIEW",
+        "population": 18606,
+        "square_miles": 6.5033169248
+    },
+    {
+        "nh_name": "OKOLONA",
+        "population": 19352,
+        "square_miles": 6.9317756398
+    },
+    {
+        "nh_name": "VALLEY STATION",
+        "population": 20245,
+        "square_miles": 7.8061641089
+    },
+    {
+        "nh_name": "FAIRDALE",
+        "population": 6435,
+        "square_miles": 5.6098867969
+    }
+]
