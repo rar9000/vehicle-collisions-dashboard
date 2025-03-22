@@ -73,30 +73,6 @@ body {
   border: 2px solid black;
 }
 
-.neighborhood-label {
-  font-weight: bold;
-  color: black;
-  background: white;
-  border-radius: 3px;
-  padding: 2px 5px;
-  border: 1px solid black;
-  text-align: center;
-  white-space: nowrap;
-  pointer-events: none; 
-}
-
-.road-label {
-  font-size: 10px;
-  font-weight: bold;
-  color: black;
-  background: white;
-  padding: 2px 4px;
-  border-radius: 3px;
-  border: 1px solid black;
-  text-align: center;
-  white-space: nowrap;
-}
-
 .box-e {
   display: flex;
   flex-direction: column;
@@ -113,7 +89,10 @@ body {
   height: 100%;
 }
 
-.box-e-child:nth-child(2) {
+/*.box-e-child:nth-child(2) {
+} */
+
+#chart {
   border-top: .3rem solid #000;
 }
 
