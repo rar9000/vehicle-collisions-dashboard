@@ -1,45 +1,76 @@
+import { zoomToNeighborhood } from './click.js';
 
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("../data/crashes/01_24_2025_crashes_incident.json")
-        .then(response => response.json())
-        .then(data => {
-            let counts = {};
+    Promise.all([
+        fetch("../data/crashes/01_24_2025_crashes_incident.json").then(r => r.json()),
+        fetch("../data/calculations/nh_population_square_miles.json").then(r => r.json())
+    ])
+    .then(([crashes, neighborhoods]) => {
+        const crashCounts = {};
+        crashes.forEach(crash => {
+            const nh = crash.nh_name;
+            if (nh && nh.trim() !== "") {
+                crashCounts[nh] = (crashCounts[nh] || 0) + 1;
+            }
+        });
 
-            data.forEach(crash => {
-                let nh = crash.nh_name;
-                if (nh && nh.trim() !== "") {
-                    counts[nh] = (counts[nh] || 0) + 1;
-                }
-            });
+        const squareMilesMap = {};
+        neighborhoods.forEach(entry => {
+            squareMilesMap[entry.nh_name] = entry.square_miles;
+        });
 
-            let sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
-            let labels = sorted.map(x => x[0]);
-            let values = sorted.map(x => x[1]);
+        const crashRates = [];
+        for (let nh in crashCounts) {
+            const mi = squareMilesMap[nh];
+            if (mi && mi > 0) {
+                crashRates.push({ nh_name: nh, rate: crashCounts[nh] / mi });
+            }
+        }
 
-            new Chart(document.getElementById("chart"), {
-                type: "bar",
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: "Crashes",
-                        data: values,
-                        backgroundColor: "tomato"
-                    }]
+        const top = crashRates.sort((a, b) => b.rate - a.rate).slice(0, 5);
+        const labels = top.map(x => x.nh_name);
+        const values = top.map(x => x.rate.toFixed(2));
+
+        const ctx = document.getElementById("chart").getContext("2d");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Crashes per Sq Mile",
+                    data: values,
+                    backgroundColor: "tomato"
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "Top 5 Neighborhoods by Crash Rate (Per Sq Mile)"
+                    }
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
+                scales: {
+                    y: {
+                        beginAtZero: true,
                         title: {
                             display: true,
-                            text: "Top 5 Neighborhoods by Crashes"
+                            text: "Crash Rate"
                         }
-                    },
-                    scales: {
-                        y: { beginAtZero: true }
                     }
+                },
+                onClick: function (event, elements) {
+                    if (!elements.length) return;
+
+                    const clickedIndex = elements[0].index;
+                    const nhName = labels[clickedIndex];
+                    zoomToNeighborhood(nhName);
                 }
-            });
+            }
         });
+    })
+    .catch(err => console.error("Chart error:", err));
 });
