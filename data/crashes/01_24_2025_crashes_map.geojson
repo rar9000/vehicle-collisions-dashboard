@@ -1,6 +1,6 @@
 {
 "type": "FeatureCollection",
-"name": "01-24-2025_crashes_incident9000",
+"name": "01_24_2025_crashes_map.geojson",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "incidentid": 34312895 }, "geometry": { "type": "Point", "coordinates": [ -85.807933927, 38.249989355 ] } },

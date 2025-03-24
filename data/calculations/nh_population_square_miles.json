@@ -55,7 +55,7 @@
         "square_miles": 0.5832108655
     },
     {
-        "nh_name": "ROCKCREEK LEXINGTON ROAD",
+        "nh_name": "ROCKCREEK",
         "population": 1306,
         "square_miles": 0.599147036
     },
@@ -85,7 +85,7 @@
         "square_miles": 0.39193782
     },
     {
-        "nh_name": "SMOKETOWN JACKSON",
+        "nh_name": "SMOKETOWN",
         "population": 2243,
         "square_miles": 0.3958531687
     },
@@ -105,7 +105,7 @@
         "square_miles": 0.0676644801
     },
     {
-        "nh_name": "ORIGINAL HIGHLANDS",
+        "nh_name": "HIGHLANDS",
         "population": 1504,
         "square_miles": 0.1823748868
     },
@@ -195,7 +195,7 @@
         "square_miles": 1.2128093123
     },
     {
-        "nh_name": "AVONDALE MELBOURNE HEIGHTS",
+        "nh_name": "AVONDALE",
         "population": 2279,
         "square_miles": 0.4845660439
     },
@@ -500,11 +500,6 @@
         "square_miles": 0.0996123791
     },
     {
-        "nh_name": "HILLVIEW LOUISVILLE OVERLAP",
-        "population": 0,
-        "square_miles": 0.0030688022
-    },
-    {
         "nh_name": "HOLLOW CREEK",
         "population": 823,
         "square_miles": 0.2298874627
@@ -625,7 +620,7 @@
         "square_miles": 0.115149701
     },
     {
-        "nh_name": "OLD BROWNSBORO PLACE",
+        "nh_name": "BROWNSBORO PLACE",
         "population": 416,
         "square_miles": 0.1333234947
     },
