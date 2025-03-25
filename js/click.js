@@ -1,15 +1,19 @@
+
+import { fetchWeather } from './weather.js';
+
 let mapRef = null;
 let neighborhoodLayerRef = null;
 let crashLayerRef = null;
-let selectedLayer = null;
+let incidentLookupRef = null;
+let selectedNeighborhood = null;
 
 // Highlight a neighborhood layer
 export function highlightNeighborhood(layer, options = { zoom: true }) {
-    if (selectedLayer) {
-        selectedLayer.setStyle({ fillColor: "red" });
+    if (selectedNeighborhood) {
+        selectedNeighborhood.setStyle({ fillColor: "red" });
     }
     layer.setStyle({ fillColor: "blue" });
-    selectedLayer = layer;
+    selectedNeighborhood = layer;
 
     if (options.zoom && mapRef) {
         mapRef.fitBounds(layer.getBounds());
@@ -30,26 +34,76 @@ export function zoomToNeighborhood(nhName) {
     });
 }
 
-// Zoom to crash point by incident ID
+// Zoom to crash point by incident ID and simulate click
 export function zoomToCrash(incidentID) {
     if (!crashLayerRef || !mapRef) return;
 
     crashLayerRef.eachLayer(layer => {
-        const props = layer.feature.properties;
-        if (props.incidentid === incidentID) {
-            mapRef.setView(layer.getLatLng(), 16);
-            layer.openPopup();
+        const props = layer.feature?.properties;
+        if (props?.incidentid === incidentID) {
+            const latlng = layer.getLatLng();
+            mapRef.setView(latlng, 16);
+            layer.fire("click");
         }
     });
 }
 
-// Optional: initialize click bindings after crash and neighborhood layers are loaded
-export function setupClickEvents({ map, neighborhoodLayer, crashLayer }) {
+// Attach click and popup behavior to crash points
+function bindCrashMarkerEvents(crashLayer) {
+    if (!incidentLookupRef) return;
+
+    crashLayer.eachLayer(layer => {
+        const props = layer.feature.properties;
+        const id = props.incidentid;
+        const lat = layer.getLatLng().lat;
+        const lon = layer.getLatLng().lng;
+        const lookup = incidentLookupRef[id];
+
+        let popupContent = `<b>Incident Number:</b> ${id}<br><b>Weather:</b> Loading...`;
+        layer.bindPopup(popupContent, {
+            autoClose: false,
+            closeOnClick: false
+        });
+
+        layer.on("click", async () => {
+            if (lookup) {
+                const weather = await fetchWeather(lat, lon, lookup.timestamp);
+                layer.setPopupContent(`<b>Incident Number:</b> ${id}<br><b>Weather:</b> ${weather}`);
+            } else {
+                layer.setPopupContent(`<b>Incident Number:</b> ${id}<br><b style="color:red;">Weather data unavailable</b>`);
+            }
+        });
+    });
+}
+
+// Initialize click after crash and neighborhood layers are loaded
+export function setupClickEvents({ map, neighborhoodLayer, crashLayer, incidentLookup }) {
     mapRef = map;
     neighborhoodLayerRef = neighborhoodLayer;
     crashLayerRef = crashLayer;
+    incidentLookupRef = incidentLookup;
 
+    // Neighborhood clicks
     neighborhoodLayerRef.eachLayer(layer => {
         layer.on("click", () => highlightNeighborhood(layer, { zoom: false }));
+    });
+
+    // Crash marker clicks 
+    bindCrashMarkerEvents(crashLayer);
+}
+
+export function enableCrashListClicks() {
+    document.querySelectorAll(".clickable-id").forEach(span => {
+        span.addEventListener("click", () => {
+            const id = parseInt(span.textContent);
+            if (id) zoomToCrash(id);
+        });
+    });
+
+    document.querySelectorAll(".clickable-nh").forEach(span => {
+        const nh = span.textContent;
+        span.addEventListener("click", () => {
+            if (nh) zoomToNeighborhood(nh);
+        });
     });
 }

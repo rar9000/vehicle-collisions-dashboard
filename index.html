@@ -18,7 +18,9 @@
         <button>Category1</button>
         <button>Category2</button>
       </div>
-      <div class="box box-c">Total (output)</div>
+      <div class="box box-c">
+        <input type="text" id="searchBar" placeholder="Search for a neighborhood..." /> 
+      </div>
       <div class="box box-map">
         <div id="map"></div>
       </div>
@@ -33,11 +35,10 @@
     </div>
   </div>
 
-  <!-- ✅ External (non-module) libraries -->
   <script src="js/leaflet/leaflet.js"></script>
   <script src="js/chart/chart.umd.js"></script>
 
-  <!-- ✅ Your ES Modules (must use relative paths + .js extension) -->
+  <script type="module" src="js/dataLoader.js"></script>
   <script type="module" src="js/map.js"></script>
   <script type="module" src="js/chart.js"></script>
   <script type="module" src="js/list.js"></script>
