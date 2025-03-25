@@ -1,6 +1,6 @@
 
 @import url("reset.css");
-@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
 html, body {
   font-size: 16px;
@@ -99,11 +99,11 @@ body {
 
 #list {
   margin: auto;
-  padding-left: 1rem;
-  font-family: "Jost", sans-serif; /* Change to any font you like */
-  font-size: 0.9rem;                  /* Adjust size: try 0.9rem, 1.2rem, etc. */
-  line-height: 1.4;                 /* Optional: improve spacing between lines */
-  color: #222;                      /* Optional: control text color */
+  padding-left: 1.6rem;
+  font-family: "Arial"; 
+  font-size: 0.85rem;                 
+  line-height: 1.4;                
+  color: #222;                      
 }
 
 /*.box-e-child:nth-child(2) {
