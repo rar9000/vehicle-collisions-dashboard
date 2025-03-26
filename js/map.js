@@ -1,11 +1,19 @@
+
 import { setupClickEvents } from './click.js';
 import {
   loadCrashGeoData,
   loadCrashIncidentData,
   loadNeighborhoodGeoData
 } from './dataLoader.js';
+import {
+  getCrashCountsByNeighborhood,
+  calculateCrashRatePerPopulation,
+  calculateCrashRatePerSquareMile,
+  createIncidentLookup
+} from './calculations.js';
+import { createNeighborhoodPopup } from './popup.js';
 
-const map = L.map("map").setView([38.2527, -85.7585], 10);
+const map = L.map("map").setView([38.2527, -85.7585], 11);
 
 L.tileLayer("https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png", {
   attribution: "&copy; <a href='https://stadiamaps.com/'>Stadia Maps</a>"
@@ -19,26 +27,11 @@ async function initMap() {
       loadCrashGeoData()
     ]);
 
-    // Count crashes per neighborhood
-    const crashCounts = {};
-    crashIncidentData.forEach(crash => {
-      const nh = crash.nh_name;
-      if (nh) {
-        crashCounts[nh] = (crashCounts[nh] || 0) + 1;
-      }
-    });
+    const crashCounts = getCrashCountsByNeighborhood(crashIncidentData);
+    const crashRatePop = calculateCrashRatePerPopulation(crashCounts, neighborhoodData);
+    const crashRateArea = calculateCrashRatePerSquareMile(crashCounts, neighborhoodData);
+    const incidentLookup = createIncidentLookup(crashIncidentData);
 
-    // Prepare incidentID lookup for weather
-    const incidentLookup = {};
-    crashIncidentData.forEach(crash => {
-      incidentLookup[crash.incidentid] = {
-        lat: crash.latitude,
-        lon: crash.longitude,
-        timestamp: crash.timestamp
-      };
-    });
-
-    // Neighborhood boundaries
     const neighborhoodLayer = L.geoJSON(neighborhoodData, {
       style: () => ({
         color: "#000",
@@ -49,22 +42,7 @@ async function initMap() {
       }),
       onEachFeature: (feature, layer) => {
         const props = feature.properties;
-        const name = props.nh_name;
-        const population = props.population || 0;
-        const squareMiles = props.square_miles || 1;
-        const crashes = crashCounts[name] || 0;
-
-        const crashRatePop = population ? ((crashes / population) * 1000).toFixed(2) : "N/A";
-        const crashRateArea = squareMiles ? (crashes / squareMiles).toFixed(2) : "N/A";
-
-        const popup = `
-          <b>${name}</b><br>
-          Population: ${population.toLocaleString()}<br>
-          Area: ${squareMiles.toFixed(2)} mi²<br>
-          Crashes: ${crashes}<br>
-          Crash Rate (per 1,000 people): ${crashRatePop}<br>
-          Crash Rate (per sq mi): ${crashRateArea}
-        `;
+        const popup = createNeighborhoodPopup(props, crashCounts, crashRatePop, crashRateArea);
 
         layer.bindPopup(popup, {
           autoClose: false,
@@ -76,7 +54,6 @@ async function initMap() {
     map.fitBounds(neighborhoodLayer.getBounds());
     neighborhoodLayer.eachLayer(layer => layer.bringToBack());
 
-    // Crash points
     const crashLayer = L.geoJSON(crashGeoData, {
       pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
         radius: 6,
@@ -97,7 +74,6 @@ async function initMap() {
 
     crashLayer.eachLayer(layer => layer.bringToFront());
 
-    // Unified click behavior
     setupClickEvents({
       map,
       neighborhoodLayer,
@@ -111,3 +87,15 @@ async function initMap() {
 }
 
 initMap();
+
+export const mapRef = map;
+
+export function resetMapView() {
+  map.setView([38.2527, -85.7585], 11);
+  map.closePopup();
+  map.eachLayer(layer => {
+    if (layer.closePopup) {
+      layer.closePopup();
+    }
+  });
+}

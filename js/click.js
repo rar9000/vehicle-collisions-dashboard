@@ -107,3 +107,10 @@ export function enableCrashListClicks() {
         });
     });
 }
+
+export function clearNeighborhoodHighlight() {
+    if (selectedNeighborhood) {
+      selectedNeighborhood.setStyle({ fillColor: "red" });
+      selectedNeighborhood = null;
+    }
+}

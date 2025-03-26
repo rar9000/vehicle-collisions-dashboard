@@ -3,6 +3,7 @@ import {
   loadPopulationSqMilesData
 } from './dataLoader.js';
 
+import { getCrashCountsByNeighborhood } from './calculations.js';
 import { zoomToCrash, zoomToNeighborhood } from './click.js';
 
 const crashList = document.getElementById("list");
@@ -10,7 +11,7 @@ const crashList = document.getElementById("list");
 let cachedCrashes = [];
 let cachedNeighborhoods = [];
 
-async function renderCrashList(filterName = "") {
+async function initList(filterName = "") {
   try {
     if (!cachedCrashes.length || !cachedNeighborhoods.length) {
       cachedCrashes = await loadCrashIncidentData();
@@ -18,6 +19,8 @@ async function renderCrashList(filterName = "") {
     }
 
     crashList.innerHTML = "";
+
+    const crashCounts = getCrashCountsByNeighborhood(cachedCrashes);
 
     const allNeighborhoods = cachedNeighborhoods.map(n => n.nh_name).sort();
     const crashMap = {};
@@ -34,7 +37,6 @@ async function renderCrashList(filterName = "") {
       }
     });
 
-    // Grouped by neighborhood
     allNeighborhoods.forEach(nh => {
       if (filterName && !nh.toLowerCase().includes(filterName.toLowerCase())) return;
 
@@ -49,18 +51,14 @@ async function renderCrashList(filterName = "") {
           idSpan.classList.add("clickable-id");
           idSpan.style.textDecoration = "underline";
           idSpan.style.cursor = "pointer";
-          idSpan.addEventListener("click", () => {
-            zoomToCrash(crash.incidentid);
-          });
+          idSpan.addEventListener("click", () => zoomToCrash(crash.incidentid));
 
           const nhSpan = document.createElement("span");
           nhSpan.textContent = nh;
           nhSpan.classList.add("clickable-nh");
           nhSpan.style.textDecoration = "underline";
           nhSpan.style.cursor = "pointer";
-          nhSpan.addEventListener("click", () => {
-            zoomToNeighborhood(nh);
-          });
+          nhSpan.addEventListener("click", () => zoomToNeighborhood(nh));
 
           const killed = Number(crash.numberkilled);
           if (killed > 0) {
@@ -78,9 +76,7 @@ async function renderCrashList(filterName = "") {
         nhSpan.classList.add("clickable-nh");
         nhSpan.style.textDecoration = "underline";
         nhSpan.style.cursor = "pointer";
-        nhSpan.addEventListener("click", () => {
-          zoomToNeighborhood(nh);
-        });
+        nhSpan.addEventListener("click", () => zoomToNeighborhood(nh));
 
         li.innerHTML = `Crash ID <span style="color:#888;">00000000</span> — `;
         li.appendChild(nhSpan);
@@ -99,9 +95,7 @@ async function renderCrashList(filterName = "") {
       idSpan.classList.add("clickable-id");
       idSpan.style.textDecoration = "underline";
       idSpan.style.cursor = "pointer";
-      idSpan.addEventListener("click", () => {
-        zoomToCrash(crash.incidentid);
-      });
+      idSpan.addEventListener("click", () => zoomToCrash(crash.incidentid));
 
       const nhSpan = document.createElement("span");
       nhSpan.textContent = "no neighborhood";
@@ -117,10 +111,10 @@ async function renderCrashList(filterName = "") {
     });
 
   } catch (err) {
-    console.error("Error rendering crash list:", err);
+    console.error("Error initializing crash list:", err);
   }
 }
 
-renderCrashList();
+initList();
 
-export { renderCrashList };
+export { initList };

@@ -1,43 +1,26 @@
-
 import { zoomToNeighborhood } from './click.js';
 import {
   loadCrashIncidentData,
   loadPopulationSqMilesData
 } from './dataLoader.js';
 
-async function renderChart() {
+import {
+  getCrashCountsByNeighborhood,
+  getTopNeighborhoodsByCrashRateSqMi
+} from './calculations.js';
+
+async function initChart() {
   try {
-    const [crashes, neighborhoods] = await Promise.all([
+    const [crashes, neighborhoodData] = await Promise.all([
       loadCrashIncidentData(),
       loadPopulationSqMilesData()
     ]);
 
-    // Count crashes per neighborhood
-    const crashCounts = {};
-    crashes.forEach(crash => {
-      const nh = crash.nh_name?.trim();
-      if (nh) crashCounts[nh] = (crashCounts[nh] || 0) + 1;
-    });
+    const crashCounts = getCrashCountsByNeighborhood(crashes);
+    const top5 = getTopNeighborhoodsByCrashRateSqMi(crashCounts, neighborhoodData, 5);
 
-    // Map of square miles
-    const squareMilesMap = {};
-    neighborhoods.forEach(entry => {
-      squareMilesMap[entry.nh_name] = entry.square_miles;
-    });
-
-    // Calculate crash rate per square mile
-    const crashRates = Object.entries(crashCounts)
-      .map(([nh, count]) => {
-        const mi = squareMilesMap[nh];
-        return mi && mi > 0
-          ? { nh_name: nh, rate: count / mi }
-          : null;
-      })
-      .filter(Boolean);
-
-    const top = crashRates.sort((a, b) => b.rate - a.rate).slice(0, 5);
-    const labels = top.map(x => x.nh_name);
-    const values = top.map(x => x.rate.toFixed(2));
+    const labels = top5.map(x => x.nh_name);
+    const values = top5.map(x => x.rate);
 
     const ctx = document.getElementById("chart").getContext("2d");
 
@@ -78,9 +61,10 @@ async function renderChart() {
         }
       }
     });
+
   } catch (err) {
-    console.error("Chart rendering error:", err);
+    console.error("🔥 Chart rendering error:", err);
   }
 }
 
-document.addEventListener("DOMContentLoaded", renderChart);
+initChart();
