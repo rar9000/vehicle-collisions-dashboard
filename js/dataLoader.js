@@ -1,4 +1,3 @@
-// dataloader.js
 
 // Cache object to hold loaded data
 const dataCache = {

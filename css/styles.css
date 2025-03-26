@@ -62,6 +62,26 @@ body {
   gap: 1vw;
 }
 
+#searchBar {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+#searchBar:focus {
+  border-color: #007bff;
+}
+
+#searchBar::placeholder {
+  color: #999;
+}
+
 .box-map {
   width: clamp(600px, 70vw, 1000px);
   height: clamp(300px, 75vh, 700px);
