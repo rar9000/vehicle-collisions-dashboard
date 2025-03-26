@@ -11,15 +11,19 @@
 <body>
   <div class="grid-container">
     <div class="site-grid">
-      <div class="box box-a">Louisville Vehicle Collisions</div>
+      <div class="box box-a">car crash LOUISVILLE</div>
       <div class="box box-b">
-        <button>Date Type</button>
-        <button>Select Date</button>
-        <button>Category1</button>
-        <button>Category2</button>
+        <select id="dateType">
+          <option>date type: Day</option>
+          <option>date type: Week</option>
+        </select>
+        <select id="fileSelect">
+          <option>Select File</option>
+        </select>
+        <button id="resetButton">Reset</button>
       </div>
       <div class="box box-c">
-        <input type="text" id="searchBar" placeholder="Search for a neighborhood..." /> 
+        <input type="text" id="searchBar" placeholder="Search for a neighborhood" /> 
       </div>
       <div class="box box-map">
         <div id="map"></div>
@@ -43,6 +47,8 @@
   <script type="module" src="js/chart.js"></script>
   <script type="module" src="js/list.js"></script>
   <script type="module" src="js/search.js" ></script>
+  <script type="module" src="js/reset.js"></script>
+
 
 </body>
 </html>
