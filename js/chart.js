@@ -1,29 +1,43 @@
-import { zoomToNeighborhood } from './click.js';
+// Imports function to zoom to a neighborhood from the map
+import { zoomToNeighborhood } from './click.js'
+
+// Imports functions to load crash and population data
 import {
   loadCrashIncidentData,
   loadPopulationSqMilesData
-} from './dataLoader.js';
+} from './dataLoader.js'
 
+// Imports functions to count crashes and get top neighborhoods by rate
 import {
   getCrashCountsByNeighborhood,
   getTopNeighborhoodsByCrashRateSqMi
-} from './calculations.js';
+} from './calculations.js'
 
+// Builds and displays the crash rate chart
 async function initChart() {
   try {
+    // Loads crash data and neighborhood area data
     const [crashes, neighborhoodData] = await Promise.all([
       loadCrashIncidentData(),
       loadPopulationSqMilesData()
-    ]);
+    ])
 
-    const crashCounts = getCrashCountsByNeighborhood(crashes);
-    const top5 = getTopNeighborhoodsByCrashRateSqMi(crashCounts, neighborhoodData, 5);
+    // Gets crash totals for each neighborhood
+    const crashCounts = getCrashCountsByNeighborhood(crashes)
 
-    const labels = top5.map(x => x.nh_name);
-    const values = top5.map(x => x.rate);
+    // Gets top 5 neighborhoods by crash rate per square mile
+    const top5 = getTopNeighborhoodsByCrashRateSqMi(crashCounts, neighborhoodData, 5)
 
-    const ctx = document.getElementById("chart").getContext("2d");
+    // Extracts neighborhood names for labels
+    const labels = top5.map(x => x.nh_name)
 
+    // Extracts crash rates for values
+    const values = top5.map(x => x.rate)
+
+    // Gets the canvas context for drawing the chart
+    const ctx = document.getElementById("chart").getContext("2d")
+
+    // Creates a bar chart using Chart.js
     new Chart(ctx, {
       type: "bar",
       data: {
@@ -53,18 +67,20 @@ async function initChart() {
             }
           }
         },
+        // Makes chart bars clickable to zoom to neighborhood
         onClick: function (event, elements) {
-          if (!elements.length) return;
-          const clickedIndex = elements[0].index;
-          const nhName = labels[clickedIndex];
-          zoomToNeighborhood(nhName);
+          if (!elements.length) return
+          const clickedIndex = elements[0].index
+          const nhName = labels[clickedIndex]
+          zoomToNeighborhood(nhName)
         }
       }
-    });
+    })
 
   } catch (err) {
-    console.error("🔥 Chart rendering error:", err);
+    console.error(" Chart rendering error", err)
   }
 }
 
-initChart();
+// Calls the chart function when the page loads
+initChart()
