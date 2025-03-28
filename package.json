@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"No tests defined yet.\"",
-    "lint:html": "htmlhint '**/*.html'", 
+    "lint:html": "htmlhint '**/*.html'",
     "format": "prettier --check '**/*.{html,js,css}'"
   },
   "keywords": [],
@@ -15,5 +15,8 @@
     "eslint": "^9.21.0",
     "htmlhint": "^1.1.4",
     "prettier": "^3.5.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
   }
 }

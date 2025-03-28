@@ -1,14 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Louisville Vehicle Collisions</title>
-    <link href="css/style.css" rel="stylesheet"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>car crash LOUISVILLE</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/leaflet/leaflet.css">
 </head>
 
 <body>
-    
+  <div class="grid-container">
+    <div class="site-grid">
+      <div class="box box-a">car crash LOUISVILLE</div>
+      <div class="box box-b">
+        <div>
+          <select id="dateType">
+            <option>date type: Day</option>
+            <option>date type: Week</option>
+          </select>
+          <select id="fileSelect"><option>Select File</option>
+        </select>
+      </div>
+        <button id="resetButton">Reset</button>
+      </div>
+      <div class="box box-c">
+        <input type="text" id="searchBar" placeholder="Search for a neighborhood" /> 
+      </div>
+      <div class="box box-d">
+        <div id="map"></div>
+      </div>
+      <div class="box box-e">
+        <div class="box-e-child list-container">
+          <ol id="list"></ol>
+        </div>
+        <div class="box-e-child chart-container">
+          <canvas id="chart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/leaflet/leaflet.js"></script>
+  <script src="js/chart/chart.umd.js"></script>
+
+  <script type="module" src="js/dataLoader.js"></script>
+  <script type="module" src="js/map.js"></script>
+  <script type="module" src="js/chart.js"></script>
+  <script type="module" src="js/list.js"></script>
+  <script type="module" src="js/search.js" ></script>
+  <script type="module" src="js/reset.js"></script>
+
+
 </body>
 </html>
