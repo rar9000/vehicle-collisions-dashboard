@@ -13,26 +13,27 @@
     <div class="site-grid">
       <div class="box box-a">car crash LOUISVILLE</div>
       <div class="box box-b">
-        <select id="dateType">
-          <option>date type: Day</option>
-          <option>date type: Week</option>
+        <div>
+          <select id="dateType">
+            <option>date type: Day</option>
+            <option>date type: Week</option>
+          </select>
+          <select id="fileSelect"><option>Select File</option>
         </select>
-        <select id="fileSelect">
-          <option>Select File</option>
-        </select>
+      </div>
         <button id="resetButton">Reset</button>
       </div>
       <div class="box box-c">
         <input type="text" id="searchBar" placeholder="Search for a neighborhood" /> 
       </div>
-      <div class="box box-map">
+      <div class="box box-d">
         <div id="map"></div>
       </div>
       <div class="box box-e">
         <div class="box-e-child list-container">
           <ol id="list"></ol>
         </div>
-        <div class="box-e-child">
+        <div class="box-e-child chart-container">
           <canvas id="chart"></canvas>
         </div>
       </div>

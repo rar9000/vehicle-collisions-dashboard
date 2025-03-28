@@ -67,10 +67,39 @@ function bindCrashMarkerEvents(crashLayer) {
 
         layer.on("click", async () => {
             if (lookup) {
-                const weather = await fetchWeather(lat, lon, lookup.timestamp);
-                layer.setPopupContent(`<b>Incident Number:</b> ${id}<br><b>Weather:</b> ${weather}`);
+              const weather = await fetchWeather(lat, lon, lookup.timestamp);
+          
+              // Format fields from the incident lookup
+              const killed = lookup.numberkilled ?? "0";
+              const injured = lookup.numberinjured ?? "0";
+              const hitAndRun = lookup.hitandrun === true ? "Yes" : "No";
+          
+              // Format time from timestamp
+              const date = new Date(lookup.timestamp);
+              const hours = date.getHours();
+              const minutes = date.getMinutes().toString().padStart(2, '0');
+              const ampm = hours >= 12 ? 'PM' : 'AM';
+              const hour12 = hours % 12 || 12;
+              const timeFormatted = `${hour12}:${minutes} ${ampm}`;
+          
+              // Handle neighborhood name
+              const neighborhood = lookup.nh_name?.trim() || "No Neighborhood";
+          
+              // Build popup content
+              layer.setPopupContent(`
+                <b>Incident Number:</b> ${id}<br>
+                <b>Time:</b> ${timeFormatted}<br>
+                <b>Neighborhood:</b> ${neighborhood}<br>
+                <b>Killed:</b> ${killed}<br>
+                <b>Injured:</b> ${injured}<br>
+                <b>Hit & Run:</b> ${hitAndRun}<br>
+                <b>Weather:</b> ${weather}
+              `);
             } else {
-                layer.setPopupContent(`<b>Incident Number:</b> ${id}<br><b style="color:red;">Weather data unavailable</b>`);
+              layer.setPopupContent(`
+                <b>Incident Number:</b> ${id}<br>
+                <b style="color:red;">Weather data unavailable</b>
+              `);
             }
         });
     });

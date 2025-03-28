@@ -1,7 +1,7 @@
 // Utility to normalize input (accepts GeoJSON or plain array)
 function normalizeFeatures(input) {
     return Array.isArray(input) ? input : input.features || [];
-  }
+}
   
   // Count crashes per neighborhood
   export function getCrashCountsByNeighborhood(crashes) {
@@ -71,16 +71,11 @@ function normalizeFeatures(input) {
       }));
   }
   
-  // Build lookup for incident weather queries
+  // Get all crash incident info 
   export function createIncidentLookup(crashIncidentData) {
     const lookup = {};
     crashIncidentData.forEach(crash => {
-      lookup[crash.incidentid] = {
-        lat: crash.latitude,
-        lon: crash.longitude,
-        timestamp: crash.timestamp
-      };
+      lookup[crash.incidentid] = crash; // keep full record
     });
     return lookup;
   }
-  
