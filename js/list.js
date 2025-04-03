@@ -1,4 +1,4 @@
-// Imports functions to load crash data and population data
+// Imports functions to load crash and population data
 import {
   loadCrashIncidentData,
   loadPopulationSqMilesData
@@ -7,42 +7,45 @@ import {
 // Imports function to count crashes per neighborhood
 import { getCrashCountsByNeighborhood } from './calculations.js'
 
-// Imports functions to zoom to crash or neighborhood
-import { zoomToCrash, zoomToNeighborhood } from './click.js'
+// Imports click handlers for IDs and neighborhood names
+import { enableCrashListClicks } from './click.js'
 
-// Gets the list element from the page
-const crashList = document.getElementById("list")
+// Gets references to HTML elements
+const crashList = document.getElementById("list")        // where crash items are listed
+const counter = document.getElementById("counter")       // where total crash count appears
+const noResultsMessage = document.getElementById("noResults")  // message for "not found"
 
-// Caches crash and neighborhood data
+// Cache crash and neighborhood data to avoid reloading
 let cachedCrashes = []
 let cachedNeighborhoods = []
 
-// Builds the list based on crash data
+// Builds the list based on crashes and search input
 async function initList(filterName = "") {
   try {
-    // Load data if not already cached
+    // Load data if needed
     if (!cachedCrashes.length || !cachedNeighborhoods.length) {
       cachedCrashes = await loadCrashIncidentData()
       cachedNeighborhoods = await loadPopulationSqMilesData()
     }
 
-    // Clears the list before adding new items
+    // Clear current list and message
     crashList.innerHTML = ""
+    noResultsMessage.textContent = ""
 
-    // Gets number of crashes per neighborhood
+    // Count crashes per neighborhood
     const crashCounts = getCrashCountsByNeighborhood(cachedCrashes)
 
-    // Gets all neighborhood names in alphabetical order
+    // Get alphabetical list of neighborhood names
     const allNeighborhoods = cachedNeighborhoods.map(n => n.nh_name).sort()
 
-    // Creates a crash list for each neighborhood
+    // Map to group crashes by neighborhood
     const crashMap = {}
     allNeighborhoods.forEach(nh => crashMap[nh] = [])
 
-    // Stores crashes that have no neighborhood
+    // Separate list for crashes with no neighborhood
     const noNeighborhoodCrashes = []
 
-    // Assigns each crash to its neighborhood group
+    // Assign each crash to its neighborhood
     cachedCrashes.forEach(crash => {
       const nh = crash.nh_name?.trim()
       if (nh && crashMap.hasOwnProperty(nh)) {
@@ -52,13 +55,18 @@ async function initList(filterName = "") {
       }
     })
 
-    // Loops through each neighborhood to build its crash list
+    // Track unique crash IDs for counter
+    const uniqueCrashIds = new Set()
+
+    // Add each neighborhood to the list
     allNeighborhoods.forEach(nh => {
+      // Apply filter if set
       if (filterName && !nh.toLowerCase().includes(filterName.toLowerCase())) return
 
       const incidents = crashMap[nh]
 
       if (incidents.length > 0) {
+        // Add each crash in this neighborhood
         incidents.forEach(crash => {
           const li = document.createElement("li")
 
@@ -67,14 +75,12 @@ async function initList(filterName = "") {
           idSpan.classList.add("clickable-id")
           idSpan.style.textDecoration = "underline"
           idSpan.style.cursor = "pointer"
-          idSpan.addEventListener("click", () => zoomToCrash(crash.incidentid))
 
           const nhSpan = document.createElement("span")
           nhSpan.textContent = nh
           nhSpan.classList.add("clickable-nh")
           nhSpan.style.textDecoration = "underline"
           nhSpan.style.cursor = "pointer"
-          nhSpan.addEventListener("click", () => zoomToNeighborhood(nh))
 
           const killed = Number(crash.numberkilled)
           if (killed > 0) {
@@ -84,16 +90,17 @@ async function initList(filterName = "") {
 
           li.append("Crash ID ", idSpan, " — ", nhSpan)
           crashList.appendChild(li)
+
+          uniqueCrashIds.add(crash.incidentid)
         })
       } else {
-        // Handles neighborhoods with zero crashes
+        // Handle neighborhoods with zero crashes
         const li = document.createElement("li")
         const nhSpan = document.createElement("span")
         nhSpan.textContent = nh
         nhSpan.classList.add("clickable-nh")
         nhSpan.style.textDecoration = "underline"
         nhSpan.style.cursor = "pointer"
-        nhSpan.addEventListener("click", () => zoomToNeighborhood(nh))
 
         li.innerHTML = `Crash ID <span style="color:#888;">00000000</span> — `
         li.appendChild(nhSpan)
@@ -101,39 +108,54 @@ async function initList(filterName = "") {
       }
     })
 
-    // Adds crashes with no neighborhood to the list
-    noNeighborhoodCrashes.forEach(crash => {
-      if (filterName && !"no neighborhood".includes(filterName.toLowerCase())) return
+    // Add crashes not tied to a neighborhood
+    if (!filterName || "no neighborhood".includes(filterName.toLowerCase())) {
+      noNeighborhoodCrashes.forEach(crash => {
+        const li = document.createElement("li")
 
-      const li = document.createElement("li")
+        const idSpan = document.createElement("span")
+        idSpan.textContent = crash.incidentid
+        idSpan.classList.add("clickable-id")
+        idSpan.style.textDecoration = "underline"
+        idSpan.style.cursor = "pointer"
 
-      const idSpan = document.createElement("span")
-      idSpan.textContent = crash.incidentid
-      idSpan.classList.add("clickable-id")
-      idSpan.style.textDecoration = "underline"
-      idSpan.style.cursor = "pointer"
-      idSpan.addEventListener("click", () => zoomToCrash(crash.incidentid))
+        const nhSpan = document.createElement("span")
+        nhSpan.textContent = "no neighborhood"
 
-      const nhSpan = document.createElement("span")
-      nhSpan.textContent = "no neighborhood"
+        const killed = Number(crash.numberkilled)
+        if (killed > 0) {
+          li.style.color = "red"
+          li.style.fontWeight = "bold"
+        }
 
-      const killed = Number(crash.numberkilled)
-      if (killed > 0) {
-        li.style.color = "red"
-        li.style.fontWeight = "bold"
-      }
+        li.append("Crash ID ", idSpan, " — ", nhSpan)
+        crashList.appendChild(li)
 
-      li.append("Crash ID ", idSpan, " — ", nhSpan)
-      crashList.appendChild(li)
-    })
+        uniqueCrashIds.add(crash.incidentid)
+      })
+    }
+
+
+    // Check if any list items were added at all
+    const anyItems = crashList.querySelectorAll("li").length > 0
+    // Show message if nothing found
+    if (!anyItems) {
+      noResultsMessage.textContent = "Not Found: please enter a valid neighborhood"
+    }
+
+    // Update counter above the list
+    counter.textContent = `Total Crashes: ${uniqueCrashIds.size}`
+
+    // Enable click behavior now that list is built
+    enableCrashListClicks()
 
   } catch (err) {
     console.error("Error initializing crash list", err)
   }
 }
 
-// Runs the list builder on page load
+// Run list builder on page load
 initList()
 
-// Exports the list function for use in other files
+// Export for use elsewhere
 export { initList }
