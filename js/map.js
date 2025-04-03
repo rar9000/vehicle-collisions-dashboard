@@ -1,14 +1,17 @@
-// Imports click behavior setup from click.js
+// imports neighborhood popup builder
+import { createNeighborhoodPopup } from './popup.js'
+
+// imports setup function for click behavior
 import { setupClickEvents } from './click.js'
 
-// Imports functions for loading data files
+// imports data loading functions
 import {
   loadCrashGeoData,
   loadCrashIncidentData,
   loadNeighborhoodGeoData
 } from './dataLoader.js'
 
-// Imports functions for counting and calculating crash rates
+// imports crash calculation functions
 import {
   getCrashCountsByNeighborhood,
   calculateCrashRatePerPopulation,
@@ -16,55 +19,51 @@ import {
   createIncidentLookup
 } from './calculations.js'
 
-// Imports function to create neighborhood popup content
-import { createNeighborhoodPopup } from './popup.js'
-
-// Creates the map and centers it on the city
+// creates and centers the map on Louisville
 const map = L.map("map").setView([38.2527, -85.7585], 11)
 
-// Adds a tile layer to the map for background styling
+// adds a background tile layer to the map
 L.tileLayer("https://tiles.stadiamaps.com/tiles/stamen_toner_lite/{z}/{x}/{y}{r}.png", {
   attribution: "&copy; <a href='https://stadiamaps.com/'>Stadia Maps</a>"
 }).addTo(map)
 
-// Loads all data and builds map layers
+// initializes all map data and layers
 async function initMap() {
   try {
-    // Loads crash incident data neighborhood shapes and crash points
+    // load all data at the same time
     const [crashIncidentData, neighborhoodData, crashGeoData] = await Promise.all([
       loadCrashIncidentData(),
       loadNeighborhoodGeoData(),
       loadCrashGeoData()
     ])
 
-    // Gets crash totals for each neighborhood
+    // calculate crash data
     const crashCounts = getCrashCountsByNeighborhood(crashIncidentData)
-
-    // Calculates crash rate per population
     const crashRatePop = calculateCrashRatePerPopulation(crashCounts, neighborhoodData)
-
-    // Calculates crash rate per square mile
     const crashRateArea = calculateCrashRatePerSquareMile(crashCounts, neighborhoodData)
 
-    // Creates a lookup for crash incident details by ID
+    // create lookup by crash ID
     const incidentLookup = createIncidentLookup(crashIncidentData)
 
-    // Adds neighborhood shapes to the map
+    // create and add neighborhood layer to map
     const neighborhoodLayer = L.geoJSON(neighborhoodData, {
       style: () => ({
-        color: "#000",
-        weight: 2,
+        color: "#000",          // border color
+        weight: 2,              // border width
         opacity: 1,
-        fillColor: "red",
+        fillColor: "red",       // default fill
         fillOpacity: 0.2
       }),
       onEachFeature: (feature, layer) => {
-        const props = feature.properties
+        // build neighborhood popup with calculated data
+        const popup = createNeighborhoodPopup(
+          feature.properties,
+          crashCounts,
+          crashRatePop,
+          crashRateArea
+        )
 
-        // Builds popup for each neighborhood using crash data
-        const popup = createNeighborhoodPopup(props, crashCounts, crashRatePop, crashRateArea)
-
-        // Attaches popup to the layer
+        // attach the popup to the neighborhood
         layer.bindPopup(popup, {
           autoClose: false,
           closeOnClick: false
@@ -72,13 +71,13 @@ async function initMap() {
       }
     }).addTo(map)
 
-    // Zooms map to fit all neighborhood shapes
+    // zoom the map to show all neighborhoods
     map.fitBounds(neighborhoodLayer.getBounds())
 
-    // Sends neighborhood shapes to the back so crash points appear on top
+    // send neighborhoods to back so crashes appear on top
     neighborhoodLayer.eachLayer(layer => layer.bringToBack())
 
-    // Adds crash points to the map using circle markers
+    // create crash point layer using circle markers
     const crashLayer = L.geoJSON(crashGeoData, {
       pointToLayer: (feature, latlng) => L.circleMarker(latlng, {
         radius: 6,
@@ -87,22 +86,14 @@ async function initMap() {
         weight: 1,
         opacity: 1,
         fillOpacity: 0.8
-      }),
-      onEachFeature: (feature, layer) => {
-        const id = feature.properties.incidentid || "Unknown"
-
-        // Adds a basic popup showing the crash ID
-        layer.bindPopup(`<b>Incident Number:</b> ${id}`, {
-          autoClose: false,
-          closeOnClick: false
-        })
-      }
+      })
+      // we no longer handle popups here — click.js takes care of that
     }).addTo(map)
 
-    // Makes sure crash points show above neighborhoods
+    // make sure crash points are visually above neighborhoods
     crashLayer.eachLayer(layer => layer.bringToFront())
 
-    // Enables click behavior for map layers
+    // enable click behavior for map interaction
     setupClickEvents({
       map,
       neighborhoodLayer,
@@ -115,13 +106,13 @@ async function initMap() {
   }
 }
 
-// Calls the map initialization function when the page loads
+// call the map initialization when page loads
 initMap()
 
-// Exports map reference for other files to use
+// export map reference for other files
 export const mapRef = map
 
-// Resets the map to its starting view and closes all popups
+// resets map view and closes all popups
 export function resetMapView() {
   map.setView([38.2527, -85.7585], 11)
   map.closePopup()
