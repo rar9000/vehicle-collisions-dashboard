@@ -35,12 +35,18 @@ select {
 
 button {
     cursor: pointer;
+    all: unset; 
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    cursor: pointer;
+    display: inline-block;
 }
 
 body {
     min-height: 100vh;
     text-rendering: optimizeSpeed; 
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 

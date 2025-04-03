@@ -5,9 +5,9 @@
 /* Desktop 1st design approach */
 
 html, body {
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 body {
@@ -45,7 +45,6 @@ body {
 
 .box {
   display: flex;
-  flex-grow: 0;
   border: .3rem solid #000;
   justify-content: center;
   align-items: center;
@@ -61,7 +60,6 @@ body {
   font-size: clamp(18px, 2vw, 32px);
   font-weight: bold;
   border-radius: 1rem;
-  box-shadow:  2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .box-b {
@@ -94,10 +92,11 @@ select {
 }
 
 #resetButton {
-  font-family: Arial, Helvetica, sans-serif;
   width: clamp(60px, 7vw, 120px);
   height: clamp(28px, 7vh, 44px);
   font-size: clamp(11px, 0.9vw, 16px);
+  text-align: center; 
+  color: black;
   font-weight: bold;
   background-color: rgb(67, 177, 67);
   border-radius: .5rem;
@@ -120,8 +119,8 @@ select {
   font-size: 1rem;
   font-family: inherit;
   background-color: #ffffff;
-  border: 5px solid #0f0000;
-  border-radius: 6px;
+  border: .3rem solid #0f0000;
+  border-radius: .5rem;
   box-sizing: border-box;
   outline: none;
   transition: border-color 0.2s ease-in-out;
@@ -133,6 +132,12 @@ select {
 
 #searchBar::placeholder {
   color: #160202;
+}
+
+#noResults {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: clamp(14px, 1.3vw, 18px);
 }
 
 .box-d {
@@ -161,21 +166,48 @@ select {
   align-items: center;
   width: 100%;
   height: 50%;
+  overflow-x: hidden;
+}
+
+#counter {
+  height: 10%;
+  width: 98.5%;
+  font-size: clamp(16px, 1.5vw, 24px);
+  font-weight: bold;
+  text-align: center;
+  padding: 0.2rem;
+  border-bottom: 0.3rem solid #000;
 }
 
 .list-container {
+  display: block;
+  box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
-  height: 100%;
+  height: 90%;
   padding: 0.5rem;
+  scroll-padding-top: 2rem;
 }
 
 #list {
-  margin: auto;
-  padding-left: 3rem;
+  display: block; 
+  box-sizing: border-box;
   font-size: clamp(13px, 1.16vw, 20px);
-  line-height: 1.4;                
-  color: #222;                      
+  line-height: 1.4;
+  color: #222;
+  width: 100%;
+  overflow-x: hidden;
+  list-style-position: inside;           
+}
+
+#list li {
+  display: list-item;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 }
 
 .chart-container {
@@ -196,125 +228,173 @@ select {
 }
 
 #chart {
-    border-top: 0.3rem solid #000;
+  border-top: 0.3rem solid #000;
 }
 
 
 /* Tablet Portrait (stack content and map) */
 @media (max-width: 1280px) and (orientation: portrait) {
     
-    body {
-      display: block;
-    }
+  body {
+    display: block;
+  }
 
-    .grid-container {
-      width: 98vw;
-      height: 98vh;
-      overflow: auto;
-    }
-    .site-grid {
-      grid-template-areas:
-      "a"
-      "b"
-      "d"
-      "c"
-      "e";
-      overflow-y: scroll;
-      margin: auto; 
-    }
-    
-    .box-a, .box-b {
-      background: #ffffff;
-      width: 70vw;
-      height: 10vh;
-    }
+  .grid-container {
+    max-height: none;
+    height: auto;
+    padding-top: 0vh;
+    padding-bottom: 8vh;
+    margin: auto;
+    margin-top: 1vh;
+    margin-bottom:  2vh;
+    gap: 0;
+    border-radius: 0;
+  }
+  .site-grid {
+    display: grid;
+    margin: 0 auto; 
+    padding: 0;
+    gap: 1rem;
+    grid-template-areas:
+    "a"
+    "b"
+    "d"
+    "c"
+    "e" 
+  }
 
-    .box-a {
-        font-size: 5vw;
-    }
+  .box {
+    display: flex;
+    border: .3rem solid #000;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
 
-    select {
-      width: 20vw;
-      height: 5vh;
-      font-size: 1.5vw;
-    }
+  .box-a {
+    width: 97vw;
+    height: 8vh;
+    font-size: 7vw;
+    border: none;
+    border-radius: 0;
+    margin-top: 0;
+    border-bottom: 0.3rem solid #000;
+  }
+  
+  .box-b {
+    width: 70vw;
+    height: 7vh;
+    gap: 5rem;
+    margin-top: 2rem;
+  }
 
-    #resetButton {
-      width: 9vw;
-      height: 5vh;
-      font-size: 1.5vw;
-    }
+  select {
+    width: 20vw;
+    height: 4vh;
+    font-size: 1.5vw;
+  }
 
-    .box-d {
-      width: 70vw;
-      height: 30vh;
-    }
+  #resetButton {
+    width: 9vw;
+    height: 5vh;
+    font-size: 1.5vw;
+  }
 
-    .box-c {
-      width: 71vw;
-    }
+  .box-d {
+    width: 80vw;
+    height: 40vh;
+  }
 
-    .box-e {
-      width: 70vw;
-      height: 50vh;
-    }
+  .box-c {
+    width: 81vw;
+    border: none;
+  }
 
-    #list {
-      margin: auto;
-      padding-left: 3rem;
-      font-size: 2vw;
-      line-height: 1.4;                
-      color: #222; 
-    }   
+  #noResults {
+    font-size: 2vw;
+  }
+
+  .box-e {
+    width: 80vw;
+    height: 50vh;
+  }
+
+  #counter {
+    width: 99.2%;
+    font-size: 3.5vw;
+  }  
+
+  #list {
+    margin: auto;
+    padding-left: 0rem;
+    font-size: 3vw;
+    line-height: 1.5;                
+  }   
     
 }
 
 /* Applies styles only when screen width is 1000px or less and device is in portrait mode */
-@media (max-width: 1000px) and (orientation: portrait) {
+@media (max-width: 750px) and (orientation: portrait) {
 
-    .box-a {
-      width: 80vw;
-      height: 8vh;
-      font-size: 6vw;
-    }
+  .site-grid {
+    gap: .5rem;
+  }
 
-    .box-b {
-      width: 80vw;
-      height: 8vh;
-    }
+  .box-a {
+    width: 97vw;
+    height: 8vh;
+    font-size: 7.5vw;
+  }
 
-    select {
-      width: 20vw;
-      height: 5vh;
-      font-size: 2.3vw;
-    }
+  .box-b {
+    width: 81vw;
+    height: 7vh;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
 
-    #resetButton {
-      width: 20vw;
-      height: 5vh;
-      font-size: 2.3vw;
-    }
+  select {
+    width: 25vw;
+    height: 5vh;
+    font-size: 2.3vw;
+  }
 
-    .box-d {
-      display: none;
-    }
+  #resetButton {
+    width: 15vw;
+    height: 6vh;
+    font-size: 2.3vw;
+    margin-left: 0vw;
+  }
 
-    .box-c {
-      width: 83vw;
-    }
+  .box-d {
+    width: 81vw;
+  }
 
-    .box-e {
-      width: 81vw;
-      height: 85vh;
-    }
+  .box-c {
+    width: 83.3vw;
+  }
 
-    #list {
-      margin: auto;
-      padding-left: 1.5rem;
-      font-size: 3.2vw;
-      line-height: 1.8rem;                
-      color: #222; 
-    }   
+  #noResults {
+    font-size: 3vw;
+  }
+
+  .box-e {
+    width: 81vw;
+    height: 70vh;
+  }
+
+  #counter {
+    width: 99.2%;
+    font-size: 5vw;
+  }  
+
+  #list {
+    margin: auto;
+    padding-left: 0rem;
+    font-size: 3.2vw;
+    line-height: 1.8rem;                
+    color: #222; 
+  }   
 }
 
 /* Applies styles only when screen width is 1000px or less and device is in landscape mode
@@ -322,49 +402,39 @@ Allows map to appear by itself when device is in landscape mode */
 @media (max-width: 1000px) and (orientation: landscape) {
 
 
-    .grid-container {
-        background-color: white;
-        border: none;
-    }
-
-    site-grid {
-      grid-template-areas:
-      "d"
-      "a"
-      "b"
-      "c"
-      "e";
-    }
-    
-    .box-d {
-      width: 100vw;
-      height: 100vh;
-      border: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 9999;
-    }
-
-    #map {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .box-a {
-      display: none;
-    }
+  .grid-container {
+    border: none;
+  }
   
-    .box-b {
-      display: none
-    }
-  
-    .box-c {
-      display: none;
-    }
-  
-    .box-e {
-      display: none;
-    }   
+  .box-d {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+  }
+
+  #map {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .box-a {
+    display: none;
+  }
+
+  .box-b {
+    display: none
+  }
+
+  .box-c {
+    display: none;
+  }
+
+  .box-e {
+    display: none;
+  }   
 }
